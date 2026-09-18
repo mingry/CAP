@@ -42,6 +42,7 @@ button span { margin-left: 28px; color: rgba(7, 17, 31, .55); font-size: 9px; }
 .corner-mark { position: absolute; width: 24px; height: 24px; border-color: rgba(244, 184, 96, .6); border-style: solid; pointer-events: none; }
 .top-left { top: 24px; left: 24px; border-width: 1px 0 0 1px; }
 .bottom-right { right: 24px; bottom: 24px; border-width: 0 1px 1px 0; }
+#mobile-controls { display: none; }
 
 @media (max-width: 600px) {
   #hud { padding: 20px; }
@@ -54,4 +55,18 @@ button span { margin-left: 28px; color: rgba(7, 17, 31, .55); font-size: 9px; }
   .overlay-panel h2 { font-size: clamp(48px, 16vw, 78px); }
   .controls { gap: 12px; flex-direction: column; }
   .corner-mark { display: none; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  #mobile-controls { position: absolute; right: 20px; bottom: 22px; left: 20px; display: flex; align-items: end; justify-content: space-between; pointer-events: none; }
+  .mobile-pad { position: relative; width: 142px; height: 142px; pointer-events: auto; }
+  .touch-button { display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border: 1px solid rgba(244, 184, 96, .45); border-radius: 50%; color: #f4f3ea; background: rgba(7, 17, 31, .72); font-family: 'Space Mono', monospace; font-size: 14px; -webkit-tap-highlight-color: transparent; touch-action: none; user-select: none; }
+  .touch-button:active { color: #07111f; background: #f4b860; transform: scale(.94); }
+  .mobile-pad .touch-button { position: absolute; }
+  .mobile-pad .up { top: 0; left: 47px; }
+  .mobile-pad .left { top: 47px; left: 0; }
+  .mobile-pad .down { top: 94px; left: 47px; }
+  .mobile-pad .right { top: 47px; right: 0; }
+  .fire-button { width: 74px; height: 74px; color: #07111f; background: #f4b860; font-size: 10px; font-weight: 700; pointer-events: auto; }
+  .progress-wrap { bottom: 184px; }
 }

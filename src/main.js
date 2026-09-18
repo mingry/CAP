@@ -21,6 +21,7 @@ const overlayTitle = document.querySelector('#overlay-title');
 const overlayCopy = document.querySelector('#overlay-copy');
 const startButton = document.querySelector('#start-button');
 const hitFlash = document.querySelector('#hit-flash');
+const mobileButtons = document.querySelectorAll('[data-control]');
 const scene = new THREE.Scene();
 scene.background = new THREE.Color('#07111f');
 scene.fog = new THREE.Fog('#07111f', 13, 38);
@@ -67,6 +68,25 @@ window.addEventListener('keyup', (event) => {
         keys.delete('space');
 });
 startButton.addEventListener('click', startGame);
+mobileButtons.forEach((button) => {
+    const control = button.dataset.control;
+    if (!control)
+        return;
+    const key = control === 'fire' ? 'space' : `arrow${control}`;
+    const press = (event) => {
+        event.preventDefault();
+        keys.add(key);
+        button.setPointerCapture(event.pointerId);
+    };
+    const release = (event) => {
+        event.preventDefault();
+        keys.delete(key);
+    };
+    button.addEventListener('pointerdown', press);
+    button.addEventListener('pointerup', release);
+    button.addEventListener('pointercancel', release);
+    button.addEventListener('pointerleave', release);
+});
 function createPlayer() {
     const group = new THREE.Group();
     const body = new THREE.Mesh(new THREE.ConeGeometry(0.62, 2.7, 6), new THREE.MeshStandardMaterial({ color: '#f4b860', metalness: 0.55, roughness: 0.3 }));
@@ -291,6 +311,7 @@ function resize() {
     const width = window.innerWidth;
     const height = window.innerHeight;
     camera.aspect = width / height;
+    camera.position.z = width < 700 ? 32 : 18;
     camera.updateProjectionMatrix();
     renderer.setSize(width, height, false);
 }

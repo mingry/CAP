@@ -26,6 +26,7 @@ const overlayTitle = document.querySelector<HTMLElement>('#overlay-title')!;
 const overlayCopy = document.querySelector<HTMLElement>('#overlay-copy')!;
 const startButton = document.querySelector<HTMLButtonElement>('#start-button')!;
 const hitFlash = document.querySelector<HTMLElement>('#hit-flash')!;
+const mobileButtons = document.querySelectorAll<HTMLButtonElement>('[data-control]');
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color('#07111f');
@@ -90,6 +91,24 @@ window.addEventListener('keyup', (event) => {
   if (event.code === 'Space') keys.delete('space');
 });
 startButton.addEventListener('click', startGame);
+mobileButtons.forEach((button) => {
+  const control = button.dataset.control;
+  if (!control) return;
+  const key = control === 'fire' ? 'space' : `arrow${control}`;
+  const press = (event: PointerEvent) => {
+    event.preventDefault();
+    keys.add(key);
+    button.setPointerCapture(event.pointerId);
+  };
+  const release = (event: PointerEvent) => {
+    event.preventDefault();
+    keys.delete(key);
+  };
+  button.addEventListener('pointerdown', press);
+  button.addEventListener('pointerup', release);
+  button.addEventListener('pointercancel', release);
+  button.addEventListener('pointerleave', release);
+});
 
 function createPlayer(): THREE.Group {
   const group = new THREE.Group();
@@ -332,6 +351,7 @@ function resize(): void {
   const width = window.innerWidth;
   const height = window.innerHeight;
   camera.aspect = width / height;
+  camera.position.z = width < 700 ? 32 : 18;
   camera.updateProjectionMatrix();
   renderer.setSize(width, height, false);
 }
