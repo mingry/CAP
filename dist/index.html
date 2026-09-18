@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07111f" />
+    <title>Skyline Vanguard</title>
+    <script type="module" crossorigin src="/assets/index-GWKRjEfT.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-0N1Ykkrp.css">
+  </head>
+  <body>
+    <main id="game-shell">
+      <canvas id="game-canvas" aria-label="Skyline Vanguard 3D game"></canvas>
+      <section id="hud" aria-live="polite">
+        <div class="hud-block brand-block">
+          <span class="eyebrow">SECTOR 07 / AIRSPACE</span>
+          <h1>SKYLINE<br /><em>VANGUARD</em></h1>
+        </div>
+        <div class="hud-block stat-block">
+          <div><span class="label">SCORE</span><strong id="score">000000</strong></div>
+          <div><span class="label">ARMOR</span><strong id="armor">03</strong></div>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-label"><span id="phase-label">THREAT WINDOW</span><span id="timer">00:00</span></div>
+          <div class="progress-track"><span id="progress"></span></div>
+        </div>
+      </section>
+      <section id="overlay" class="overlay visible">
+        <div class="overlay-panel">
+          <span class="eyebrow">FLIGHT SYSTEM ONLINE</span>
+          <h2 id="overlay-title">BREAK THE<br /><em>HORIZON</em></h2>
+          <p id="overlay-copy">10초 동안 몰려오는 적을 뚫고<br />등장하는 기함을 격추하세요.</p>
+          <button id="start-button" type="button">출격 시작 <span>SPACE</span></button>
+          <div class="controls"><span>← ↑ ↓ → 이동</span><span>SPACE 발사</span></div>
+        </div>
+      </section>
+      <div id="hit-flash" aria-hidden="true"></div>
+      <div class="corner-mark top-left"></div>
+      <div class="corner-mark bottom-right"></div>
+    </main>
+  </body>
+</html>
